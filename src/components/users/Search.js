@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react'
-import PropTypes from 'prop-types'
 import GithubContext from '../../context/github/githubContext'
+import AlertContext from '../../context/alert/alertContext'
 
-const Search = ({ setAlert }) => {
+const Search = () => {
 
     const githubContaxt = useContext(GithubContext);
+    const alertContext = useContext(AlertContext);
     //Using useState for state as we have changed the class based component to function based componenet
     const [text, setText] = useState('');
 
@@ -17,7 +18,7 @@ const Search = ({ setAlert }) => {
         e.preventDefault();
         //Adding trim to remove all white spaces 
         if (text.trim() === '') {
-            setAlert('Please enter someting', 'light');
+            alertContext.setAlert('Please enter someting', 'light');
         } else {
             githubContaxt.searchUsers(text)
             setText('')
@@ -37,7 +38,4 @@ const Search = ({ setAlert }) => {
 
 }
 
-Search.propTypes = {
-    setAlert: PropTypes.func.isRequired
-}
 export default Search
