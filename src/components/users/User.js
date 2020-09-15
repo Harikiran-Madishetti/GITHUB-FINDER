@@ -1,14 +1,13 @@
 import React, { useEffect, Fragment, useContext } from 'react';
 import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Repos from '../repos/Repos';
 import GithubContext from '../../context/github/githubContext'
 
-const User = ({ repos, getUserRepos, match }) => {
+const User = ({ match }) => {
     const githubContaxt = useContext(GithubContext);
 
-    const { user, loading, getUser } = githubContaxt;
+    const { user, loading, getUser, repos, getUserRepos } = githubContaxt;
 
     // using this comment to disable warning as we are not adding dependencies for useEffect to mimic behaviour of component did mount eslint-disable-next-line  
     useEffect(() => {
@@ -81,9 +80,5 @@ const User = ({ repos, getUserRepos, match }) => {
     )
 }
 
-User.propTypes = {
-    repos: PropTypes.array.isRequired,
-    getUserRepos: PropTypes.func.isRequired
-}
 
 export default User
