@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
+import GithubContext from '../../context/github/githubContext'
 
-const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
+const Search = ({ showClear, clearUsers, setAlert }) => {
+
+    const githubContaxt = useContext(GithubContext);
     //Using useState for state as we have changed the class based component to function based componenet
     const [text, setText] = useState('');
 
@@ -16,7 +19,7 @@ const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
         if (text.trim() === '') {
             setAlert('Please enter someting', 'light');
         } else {
-            searchUsers(text)
+            githubContaxt.searchUsers(text)
             setText('')
         }
 
@@ -35,7 +38,6 @@ const Search = ({ searchUsers, showClear, clearUsers, setAlert }) => {
 }
 
 Search.propTypes = {
-    searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
     setAlert: PropTypes.func.isRequired
